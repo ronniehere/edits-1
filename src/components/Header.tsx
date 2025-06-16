@@ -30,7 +30,7 @@ const Header = () => {
           <div className="flex items-center">
             <button 
               onClick={() => scrollToSection('hero')}
-              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+              className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
               edits
             </button>
@@ -60,7 +60,7 @@ const Header = () => {
               View Services
             </Button>
             <Button 
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+              className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white"
               onClick={() => scrollToSection('contact')}
             >
               Start Project
@@ -99,7 +99,7 @@ const Header = () => {
                   View Services
                 </Button>
                 <Button 
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                  className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white"
                   onClick={() => scrollToSection('contact')}
                 >
                   Start Project

@@ -67,7 +67,7 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <button 
               onClick={() => scrollToSection('hero')}
-              className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-4 hover:opacity-80 transition-opacity"
+              className="text-3xl font-bold bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent mb-4 hover:opacity-80 transition-opacity"
             >
               edits
             </button>
@@ -81,7 +81,7 @@ const Footer = () => {
                 <button
                   key={social.label}
                   onClick={() => handleSocialClick(social.platform)}
-                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 transition-all duration-300"
+                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gradient-to-r hover:from-red-500 hover:to-pink-600 transition-all duration-300"
                   aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />

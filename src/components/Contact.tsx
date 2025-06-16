@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -69,11 +70,11 @@ const Contact = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-blue-50">
+    <section className="py-24 bg-gradient-to-b from-white to-red-50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-gray-900 mb-6">
-            Get <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Started</span>
+            Get <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">Started</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Ready to create content that drives results? Let's discuss your project and bring your vision to life.
@@ -91,12 +92,12 @@ const Contact = () => {
               >
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center">
                       <info.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 mb-1">{info.title}</h3>
-                      <p className="text-xl font-bold text-blue-600 mb-1">{info.details}</p>
+                      <p className="text-xl font-bold text-red-600 mb-1">{info.details}</p>
                       <p className="text-gray-600 text-sm">{info.description}</p>
                     </div>
                   </div>
@@ -157,7 +158,7 @@ const Contact = () => {
                       value={formData.projectType}
                       onChange={handleChange}
                       disabled={isSubmitting}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 disabled:opacity-50"
                     >
                       <option value="">Select project type</option>
                       <option value="instagram-reels">Instagram Reels</option>
@@ -189,7 +190,7 @@ const Contact = () => {
                     type="submit"
                     size="lg"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
+                    className="w-full bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center">

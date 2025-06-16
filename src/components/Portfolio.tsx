@@ -31,7 +31,8 @@ const Portfolio = () => {
       category: "reels",
       views: "2.3M",
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      client: "FitLife Studio"
+      client: "FitLife Studio",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
     },
     {
       id: 2,
@@ -39,7 +40,8 @@ const Portfolio = () => {
       category: "youtube",
       views: "890K",
       image: "https://images.unsplash.com/photo-1556909075-f3dc0b6aa39e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      client: "Chef's Corner"
+      client: "Chef's Corner",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
     },
     {
       id: 3,
@@ -47,7 +49,8 @@ const Portfolio = () => {
       category: "tiktok",
       views: "1.5M",
       image: "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      client: "TechReview Pro"
+      client: "TechReview Pro",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
     },
     {
       id: 4,
@@ -55,7 +58,8 @@ const Portfolio = () => {
       category: "reels",
       views: "3.1M",
       image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      client: "Style Maven"
+      client: "Style Maven",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
     },
     {
       id: 5,
@@ -63,7 +67,8 @@ const Portfolio = () => {
       category: "longform",
       views: "45K",
       image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      client: "Entrepreneur Hub"
+      client: "Entrepreneur Hub",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
     },
     {
       id: 6,
@@ -71,7 +76,8 @@ const Portfolio = () => {
       category: "youtube",
       views: "678K",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      client: "Wanderlust Media"
+      client: "Wanderlust Media",
+      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
     }
   ];
 

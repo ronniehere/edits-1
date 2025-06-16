@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { X, Play, ExternalLink, Eye, Calendar, Users, TrendingUp } from 'lucide-react';
@@ -29,12 +28,18 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, isOpen, onClose, mode }: ProjectModalProps) => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
   if (!isOpen || !project) return null;
 
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
+  };
+
+  const handlePlayVideo = () => {
+    setIsVideoPlaying(true);
   };
 
   return (
@@ -50,20 +55,35 @@ const ProjectModal = ({ project, isOpen, onClose, mode }: ProjectModalProps) => 
         {mode === 'video' ? (
           <div className="p-0">
             <div className="relative aspect-video bg-gray-900 rounded-t-2xl overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                <Button 
-                  size="lg" 
-                  className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30 rounded-full"
+              {isVideoPlaying && project.videoUrl ? (
+                <video 
+                  src={project.videoUrl}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-cover"
+                  onEnded={() => setIsVideoPlaying(false)}
                 >
-                  <Play className="w-8 h-8 mr-3" />
-                  Play Video
-                </Button>
-              </div>
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
+                <>
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                    <Button 
+                      size="lg" 
+                      className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30 rounded-full"
+                      onClick={handlePlayVideo}
+                    >
+                      <Play className="w-8 h-8 mr-3" />
+                      Play Video
+                    </Button>
+                  </div>
+                </>
+              )}
               <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full flex items-center gap-1">
                 <Eye className="w-4 h-4" />
                 <span className="text-sm font-medium">{project.views}</span>

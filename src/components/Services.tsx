@@ -64,8 +64,8 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
-              <CardContent className="p-8">
+            <Card key={index} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg h-full">
+              <CardContent className="p-8 flex flex-col h-full">
                 <div className="mb-6">
                   <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <service.icon className="w-8 h-8 text-white" />
@@ -74,7 +74,7 @@ const Services = () => {
                   <p className="text-gray-600 leading-relaxed">{service.description}</p>
                 </div>
 
-                <ul className="space-y-2 mb-6">
+                <ul className="space-y-2 mb-6 flex-grow">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center text-sm text-gray-700">
                       <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
@@ -84,7 +84,7 @@ const Services = () => {
                 </ul>
 
                 <Button 
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-300"
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-300 mt-auto"
                   onClick={() => scrollToSection('contact')}
                 >
                   Learn More

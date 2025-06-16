@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, ExternalLink, Eye } from 'lucide-react';
@@ -149,10 +150,10 @@ const Portfolio = () => {
                     alt={project.title}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
                     <Button 
                       size="lg" 
-                      className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30 rounded-full"
+                      className="bg-white/90 backdrop-blur-sm text-gray-900 border-white/30 hover:bg-white hover:text-black rounded-full shadow-lg"
                       onClick={() => handleViewProject(project.id)}
                     >
                       <Play className="w-5 h-5 mr-2" />

@@ -18,7 +18,6 @@ const Header = () => {
 
   const navItems = [
     { label: 'Services', href: 'services' },
-    { label: 'Portfolio', href: 'portfolio' },
     { label: 'About', href: 'about' },
     { label: 'Contact', href: 'contact' },
   ];
@@ -55,10 +54,10 @@ const Header = () => {
             <Button 
               variant="outline" 
               className="border-2 border-gray-400 text-gray-700 bg-white hover:bg-gray-50 shadow-md"
-              onClick={() => scrollToSection('portfolio')}
+              onClick={() => scrollToSection('services')}
             >
               <Play className="w-4 h-4 mr-2" />
-              View Reel
+              View Services
             </Button>
             <Button 
               className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
@@ -94,10 +93,10 @@ const Header = () => {
                 <Button 
                   variant="outline" 
                   className="border-2 border-gray-400 text-gray-700 bg-white hover:bg-gray-50 shadow-md"
-                  onClick={() => scrollToSection('portfolio')}
+                  onClick={() => scrollToSection('services')}
                 >
                   <Play className="w-4 h-4 mr-2" />
-                  View Reel
+                  View Services
                 </Button>
                 <Button 
                   className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"

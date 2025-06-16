@@ -61,7 +61,7 @@ const Hero = () => {
             Start Your Project
           </Button>
           
-          <Button variant="outline" size="lg" onClick={() => scrollToSection('portfolio')} className="border-white/30 hover:bg-white/10 px-8 py-4 text-lg rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 text-gray-950">
+          <Button variant="outline" size="lg" onClick={() => scrollToSection('portfolio')} className="border-white/30 px-8 py-4 text-lg rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 text-gray-950 bg-gray-50">
             <TrendingUp className="w-5 h-5 mr-2" />
             View Our Work
           </Button>

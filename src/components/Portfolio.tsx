@@ -1,4 +1,5 @@
 
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, ExternalLink, Eye } from 'lucide-react';
@@ -33,7 +34,7 @@ const Portfolio = () => {
       views: "2.3M",
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       client: "FitLife Studio",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+      videoUrl: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4"
     },
     {
       id: 2,
@@ -42,7 +43,7 @@ const Portfolio = () => {
       views: "890K",
       image: "https://images.unsplash.com/photo-1556909075-f3dc0b6aa39e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       client: "Chef's Corner",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+      videoUrl: "https://sample-videos.com/zip/10/mp4/SampleVideo_640x360_1mb.mp4"
     },
     {
       id: 3,
@@ -51,7 +52,7 @@ const Portfolio = () => {
       views: "1.5M",
       image: "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       client: "TechReview Pro",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+      videoUrl: "https://sample-videos.com/zip/10/mp4/SampleVideo_720x480_1mb.mp4"
     },
     {
       id: 4,
@@ -60,7 +61,7 @@ const Portfolio = () => {
       views: "3.1M",
       image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       client: "Style Maven",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+      videoUrl: "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_2mb.mp4"
     },
     {
       id: 5,
@@ -69,7 +70,7 @@ const Portfolio = () => {
       views: "45K",
       image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       client: "Entrepreneur Hub",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+      videoUrl: "https://sample-videos.com/zip/10/mp4/SampleVideo_360x240_1mb.mp4"
     },
     {
       id: 6,
@@ -78,7 +79,7 @@ const Portfolio = () => {
       views: "678K",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       client: "Wanderlust Media",
-      videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+      videoUrl: "https://sample-videos.com/zip/10/mp4/SampleVideo_480x360_1mb.mp4"
     }
   ];
 
@@ -205,3 +206,4 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+

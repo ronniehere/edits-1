@@ -1,38 +1,33 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Sparkles, TrendingUp } from 'lucide-react';
-
 const Hero = () => {
   const [currentText, setCurrentText] = useState(0);
-  const texts = [
-    "Viral Content",
-    "Engaging Reels", 
-    "Brand Stories",
-    "Social Growth"
-  ];
-
+  const texts = ["Viral Content", "Engaging Reels", "Brand Stories", "Social Growth"];
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentText((prev) => (prev + 1) % texts.length);
+      setCurrentText(prev => (prev + 1) % texts.length);
     }, 2000);
     return () => clearInterval(interval);
   }, []);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{
+        animationDelay: '1s'
+      }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{
+        animationDelay: '0.5s'
+      }}></div>
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
@@ -43,39 +38,38 @@ const Hero = () => {
           </div>
         </div>
 
-        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 animate-fade-in" style={{
+        animationDelay: '0.2s'
+      }}>
           Create{' '}
           <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-scale-in">
             {texts[currentText]}
           </span>
         </h1>
 
-        <p className="text-xl md:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.4s' }}>
+        <p className="text-xl md:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed animate-fade-in" style={{
+        animationDelay: '0.4s'
+      }}>
           Transform your raw footage into scroll-stopping content that drives engagement, builds your brand, and grows your audience across all platforms.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
-            onClick={() => scrollToSection('contact')}
-          >
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in" style={{
+        animationDelay: '0.6s'
+      }}>
+          <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105" onClick={() => scrollToSection('contact')}>
             <Play className="w-5 h-5 mr-2" />
             Start Your Project
           </Button>
           
-          <Button 
-            variant="outline" 
-            size="lg" 
-            className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105"
-            onClick={() => scrollToSection('portfolio')}
-          >
+          <Button variant="outline" size="lg" onClick={() => scrollToSection('portfolio')} className="border-white/30 hover:bg-white/10 px-8 py-4 text-lg rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-105 text-gray-950">
             <TrendingUp className="w-5 h-5 mr-2" />
             View Our Work
           </Button>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in" style={{
+        animationDelay: '0.8s'
+      }}>
           <div className="text-center">
             <div className="text-3xl font-bold text-white mb-2">500+</div>
             <div className="text-blue-200">Videos Edited</div>
@@ -90,8 +84,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;

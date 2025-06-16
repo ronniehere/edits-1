@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Sparkles } from 'lucide-react';
@@ -37,7 +36,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        <div className="mb-8 animate-fade-in">
+        <div className="mb-8 mt-12 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
             <Sparkles className="w-5 h-5 text-yellow-400" />
             <span className="text-white font-medium">Professional Social Media Editing</span>

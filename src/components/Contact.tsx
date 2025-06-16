@@ -1,10 +1,9 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { Mail, Phone, MapPin, Send, Clock, DollarSign } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Clock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
@@ -66,12 +65,6 @@ const Contact = () => {
       title: "Response Time",
       details: "< 2 hours",
       description: "We reply fast"
-    },
-    {
-      icon: DollarSign,
-      title: "Starting Price",
-      details: "$150/video",
-      description: "Competitive rates"
     }
   ];
 

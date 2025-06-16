@@ -5,8 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Mail, Phone, MapPin, Send, Clock, DollarSign } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,10 +17,29 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     console.log('Form submitted:', formData);
-    // Handle form submission here
+    
+    toast({
+      title: "Message sent successfully!",
+      description: "We'll get back to you within 2 hours.",
+    });
+    
+    // Reset form
+    setFormData({
+      name: '',
+      email: '',
+      projectType: '',
+      message: ''
+    });
+    
+    setIsSubmitting(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -27,12 +49,17 @@ const Contact = () => {
     });
   };
 
+  const handleEmailClick = () => {
+    window.location.href = 'mailto:hello@studioedits.com';
+  };
+
   const contactInfo = [
     {
       icon: Mail,
       title: "Email Us",
       details: "hello@studioedits.com",
-      description: "Get in touch for quotes"
+      description: "Get in touch for quotes",
+      onClick: handleEmailClick
     },
     {
       icon: Clock,
@@ -64,7 +91,11 @@ const Contact = () => {
           {/* Contact Info */}
           <div className="space-y-6">
             {contactInfo.map((info, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
+              <Card 
+                key={index} 
+                className={`hover:shadow-lg transition-shadow duration-300 ${info.onClick ? 'cursor-pointer' : ''}`}
+                onClick={info.onClick}
+              >
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
@@ -100,6 +131,7 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="Your full name"
                         className="w-full"
+                        disabled={isSubmitting}
                       />
                     </div>
                     
@@ -116,6 +148,7 @@ const Contact = () => {
                         onChange={handleChange}
                         placeholder="your@email.com"
                         className="w-full"
+                        disabled={isSubmitting}
                       />
                     </div>
                   </div>
@@ -130,7 +163,8 @@ const Contact = () => {
                       required
                       value={formData.projectType}
                       onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      disabled={isSubmitting}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:opacity-50"
                     >
                       <option value="">Select project type</option>
                       <option value="instagram-reels">Instagram Reels</option>
@@ -154,16 +188,27 @@ const Contact = () => {
                       placeholder="Tell us about your project, timeline, and any specific requirements..."
                       rows={5}
                       className="w-full"
+                      disabled={isSubmitting}
                     />
                   </div>
 
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
                   >
-                    <Send className="w-5 h-5 mr-2" />
-                    Send Message
+                    {isSubmitting ? (
+                      <div className="flex items-center">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                        Sending...
+                      </div>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5 mr-2" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>

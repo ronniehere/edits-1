@@ -6,6 +6,13 @@ import { Play, ExternalLink, Eye } from 'lucide-react';
 const Portfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'reels', label: 'Instagram Reels' },
@@ -69,6 +76,18 @@ const Portfolio = () => {
     ? projects 
     : projects.filter(project => project.category === selectedCategory);
 
+  const handleViewProject = (projectId: number) => {
+    console.log(`Viewing project ${projectId}`);
+    // In a real app, this would open a modal or navigate to project details
+    alert(`Opening project details for ${projects.find(p => p.id === projectId)?.title}`);
+  };
+
+  const handleCaseStudy = (projectId: number) => {
+    console.log(`Opening case study for project ${projectId}`);
+    // In a real app, this would navigate to a detailed case study page
+    alert(`Opening case study for ${projects.find(p => p.id === projectId)?.title}`);
+  };
+
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
@@ -110,7 +129,11 @@ const Portfolio = () => {
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <Button size="lg" className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30 rounded-full">
+                  <Button 
+                    size="lg" 
+                    className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30 rounded-full"
+                    onClick={() => handleViewProject(project.id)}
+                  >
                     <Play className="w-5 h-5 mr-2" />
                     Watch Video
                   </Button>
@@ -124,7 +147,11 @@ const Portfolio = () => {
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
                 <p className="text-gray-600 mb-4">{project.client}</p>
-                <Button variant="outline" className="w-full group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-600 group-hover:text-white group-hover:border-transparent transition-all duration-300">
+                <Button 
+                  variant="outline" 
+                  className="w-full group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-600 group-hover:text-white group-hover:border-transparent transition-all duration-300"
+                  onClick={() => handleCaseStudy(project.id)}
+                >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   View Case Study
                 </Button>
@@ -134,7 +161,11 @@ const Portfolio = () => {
         </div>
 
         <div className="text-center mt-16">
-          <Button size="lg" className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 rounded-full">
+          <Button 
+            size="lg" 
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-4 rounded-full"
+            onClick={() => scrollToSection('contact')}
+          >
             View All Projects
           </Button>
         </div>

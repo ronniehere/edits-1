@@ -4,6 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Instagram, Youtube, Zap, Scissors, Camera, Palette } from 'lucide-react';
 
 const Services = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const services = [
     {
       icon: Instagram,
@@ -76,7 +83,10 @@ const Services = () => {
                   ))}
                 </ul>
 
-                <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-300">
+                <Button 
+                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-300"
+                  onClick={() => scrollToSection('contact')}
+                >
                   Learn More
                 </Button>
               </CardContent>

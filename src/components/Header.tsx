@@ -8,11 +8,19 @@ const Header = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
+
   const navItems = [
-    { label: 'Services', href: '#services' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Services', href: 'services' },
+    { label: 'Portfolio', href: 'portfolio' },
+    { label: 'About', href: 'about' },
+    { label: 'Contact', href: 'contact' },
   ];
 
   return (
@@ -21,31 +29,41 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <button 
+              onClick={() => scrollToSection('hero')}
+              className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            >
               edits
-            </div>
+            </button>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.label}
-                href={item.href}
+                onClick={() => scrollToSection(item.href)}
                 className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200"
               >
                 {item.label}
-              </a>
+              </button>
             ))}
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50">
+            <Button 
+              variant="outline" 
+              className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              onClick={() => scrollToSection('portfolio')}
+            >
               <Play className="w-4 h-4 mr-2" />
               View Reel
             </Button>
-            <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white">
+            <Button 
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+              onClick={() => scrollToSection('contact')}
+            >
               Start Project
             </Button>
           </div>
@@ -64,21 +82,27 @@ const Header = () => {
           <div className="md:hidden py-4 border-t border-gray-200 bg-white">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item.label}
-                  href={item.href}
-                  className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 px-2 py-1"
-                  onClick={toggleMenu}
+                  onClick={() => scrollToSection(item.href)}
+                  className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 px-2 py-1 text-left"
                 >
                   {item.label}
-                </a>
+                </button>
               ))}
               <div className="flex flex-col space-y-3 pt-4">
-                <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50">
+                <Button 
+                  variant="outline" 
+                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                  onClick={() => scrollToSection('portfolio')}
+                >
                   <Play className="w-4 h-4 mr-2" />
                   View Reel
                 </Button>
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white">
+                <Button 
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white"
+                  onClick={() => scrollToSection('contact')}
+                >
                   Start Project
                 </Button>
               </div>

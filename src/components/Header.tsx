@@ -54,7 +54,7 @@ const Header = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Button 
               variant="outline" 
-              className="border-gray-300 text-gray-700 hover:bg-gray-50"
+              className="border-gray-300 text-gray-700 bg-white hover:bg-gray-50 shadow-sm"
               onClick={() => scrollToSection('portfolio')}
             >
               <Play className="w-4 h-4 mr-2" />
@@ -93,7 +93,7 @@ const Header = () => {
               <div className="flex flex-col space-y-3 pt-4">
                 <Button 
                   variant="outline" 
-                  className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                  className="border-gray-300 text-gray-700 bg-white hover:bg-gray-50 shadow-sm"
                   onClick={() => scrollToSection('portfolio')}
                 >
                   <Play className="w-4 h-4 mr-2" />

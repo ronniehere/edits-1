@@ -1,19 +1,8 @@
 
-import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Sparkles } from 'lucide-react';
 
 const Hero = () => {
-  const [currentText, setCurrentText] = useState(0);
-  const texts = ["Viral Content", "Engaging Reels", "Brand Stories", "Social Growth"];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentText(prev => (prev + 1) % texts.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -48,8 +37,8 @@ const Hero = () => {
           animationDelay: '0.2s'
         }}>
           Create{' '}
-          <span className="bg-gradient-to-r from-red-400 via-pink-400 to-rose-400 bg-clip-text text-transparent animate-scale-in">
-            {texts[currentText]}
+          <span className="bg-gradient-to-r from-red-400 via-pink-400 to-rose-400 bg-clip-text text-transparent">
+            Viral Content
           </span>
         </h1>
 

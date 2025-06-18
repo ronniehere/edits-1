@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Sparkles } from 'lucide-react';
@@ -37,6 +36,7 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+        {/* Animated background elements */}
         <div className="mb-8 mt-20 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
             <Sparkles className="w-5 h-5 text-yellow-400" />
@@ -72,9 +72,7 @@ const Hero = () => {
           </Button>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in" style={{
-          animationDelay: '0.8s'
-        }}>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center">
             <div className="text-3xl font-bold text-white mb-2">500+</div>
             <div className="text-red-200">Videos Edited</div>

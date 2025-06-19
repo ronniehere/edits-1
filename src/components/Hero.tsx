@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Sparkles } from 'lucide-react';
@@ -36,7 +37,6 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
-        {/* Animated background elements */}
         <div className="mb-8 mt-20 animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
             <Sparkles className="w-5 h-5 text-yellow-400" />
@@ -48,10 +48,8 @@ const Hero = () => {
           animationDelay: '0.2s'
         }}>
           Create{' '}
-          <span className="relative inline-block w-80 h-20">
-            <span className="absolute inset-0 bg-gradient-to-r from-red-400 via-pink-400 to-rose-400 bg-clip-text text-transparent text-center leading-[80px]">
-              {texts[currentText]}
-            </span>
+          <span className="bg-gradient-to-r from-red-400 via-pink-400 to-rose-400 bg-clip-text text-transparent animate-scale-in">
+            {texts[currentText]}
           </span>
         </h1>
 
@@ -74,7 +72,9 @@ const Hero = () => {
           </Button>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 animate-fade-in" style={{
+          animationDelay: '0.8s'
+        }}>
           <div className="text-center">
             <div className="text-3xl font-bold text-white mb-2">500+</div>
             <div className="text-red-200">Videos Edited</div>

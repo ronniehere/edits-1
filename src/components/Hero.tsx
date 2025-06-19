@@ -49,8 +49,10 @@ const Hero = () => {
           animationDelay: '0.2s'
         }}>
           Create{' '}
-          <span className="bg-gradient-to-r from-red-400 via-pink-400 to-rose-400 bg-clip-text text-transparent inline-block w-80 h-20 flex items-center justify-center">
-            {texts[currentText]}
+          <span className="relative inline-block w-80 h-20">
+            <span className="absolute inset-0 bg-gradient-to-r from-red-400 via-pink-400 to-rose-400 bg-clip-text text-transparent flex items-center justify-center">
+              {texts[currentText]}
+            </span>
           </span>
         </h1>
 

@@ -95,9 +95,9 @@ const Contact = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0">
                       <info.icon className="w-6 h-6 text-white" />
                     </div>
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 mb-1">{info.title}</h3>
-                      <p className="text-xl font-bold text-red-600 mb-1">{info.details}</p>
+                      <p className="text-lg font-bold text-red-600 mb-1 break-words">{info.details}</p>
                       <p className="text-gray-600 text-sm">{info.description}</p>
                     </div>
                   </div>

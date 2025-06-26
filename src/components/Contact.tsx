@@ -97,7 +97,7 @@ const Contact = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 mb-1">{info.title}</h3>
-                      <p className="text-lg font-bold text-red-600 mb-1 break-words">{info.details}</p>
+                      <p className="text-base font-bold text-red-600 mb-1 break-words">{info.details}</p>
                       <p className="text-gray-600 text-sm">{info.description}</p>
                     </div>
                   </div>

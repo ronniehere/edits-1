@@ -1,5 +1,6 @@
 
 import { Instagram, Youtube, Twitter, Mail, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const scrollToSection = (sectionId: string) => {
@@ -135,6 +136,12 @@ const Footer = () => {
             >
               Cookie Policy
             </button>
+            <Link 
+              to="/admin-login"
+              className="text-gray-500 hover:text-gray-400 transition-colors duration-200 text-xs"
+            >
+              Admin
+            </Link>
           </div>
         </div>
       </div>

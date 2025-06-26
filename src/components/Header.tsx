@@ -1,116 +1,111 @@
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Menu, X, Play } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMenuOpen(false);
     }
-  };
-
-  const navigateToPage = (path: string) => {
-    window.location.href = path;
     setIsMenuOpen(false);
   };
 
   const navItems = [
-    { label: 'Services', href: 'services', type: 'scroll' },
-    { label: 'About', href: 'about', type: 'scroll' },
-    { label: 'Blog', href: '/blog', type: 'navigate' },
-    { label: 'Contact', href: 'contact', type: 'scroll' },
+    { label: 'Services', action: () => scrollToSection('services') },
+    { label: 'About', action: () => scrollToSection('about') },
+    { label: 'Contact', action: () => scrollToSection('contact') },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center">
-            <button 
-              onClick={() => scrollToSection('hero')}
-              className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-            >
-              edits
-            </button>
-          </div>
+          <button 
+            onClick={() => scrollToSection('hero')}
+            className="text-2xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+          >
+            edits
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.label}
-                onClick={() => item.type === 'scroll' ? scrollToSection(item.href) : navigateToPage(item.href)}
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200"
+                onClick={item.action}
+                className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200"
               >
                 {item.label}
               </button>
             ))}
-          </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button 
-              variant="outline" 
-              className="border-2 border-gray-400 text-gray-700 bg-white hover:bg-gray-50 shadow-md"
-              onClick={() => scrollToSection('services')}
+            <Link
+              to="/blog"
+              className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200"
             >
-              <Play className="w-4 h-4 mr-2" />
-              View Services
-            </Button>
-            <Button 
-              className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white"
+              Blog
+            </Link>
+            <button
               onClick={() => scrollToSection('contact')}
+              className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
             >
-              Start Project
-            </Button>
-          </div>
+              Get Started
+            </button>
+          </nav>
 
           {/* Mobile Menu Button */}
           <button
-            onClick={toggleMenu}
-            className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 text-gray-700 hover:text-red-600 transition-colors"
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200 bg-white">
+          <div className="md:hidden bg-white border-t border-gray-200 py-4">
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => item.type === 'scroll' ? scrollToSection(item.href) : navigateToPage(item.href)}
-                  className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 px-2 py-1 text-left"
+                  onClick={item.action}
+                  className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200 text-left px-4"
                 >
                   {item.label}
                 </button>
               ))}
-              <div className="flex flex-col space-y-3 pt-4">
-                <Button 
-                  variant="outline" 
-                  className="border-2 border-gray-400 text-gray-700 bg-white hover:bg-gray-50 shadow-md"
-                  onClick={() => scrollToSection('services')}
-                >
-                  <Play className="w-4 h-4 mr-2" />
-                  View Services
-                </Button>
-                <Button 
-                  className="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white"
-                  onClick={() => scrollToSection('contact')}
-                >
-                  Start Project
-                </Button>
-              </div>
+              <Link
+                to="/blog"
+                className="text-gray-700 hover:text-red-600 font-medium transition-colors duration-200 text-left px-4"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <button
+                onClick={() => {
+                  scrollToSection('contact');
+                  setIsMenuOpen(false);
+                }}
+                className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-2 rounded-full mx-4 text-center hover:shadow-lg transition-all duration-200"
+              >
+                Get Started
+              </button>
             </nav>
           </div>
         )}

@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Play, ExternalLink } from 'lucide-react';
+import { Menu, X, Play } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,10 +16,16 @@ const Header = () => {
     }
   };
 
+  const navigateToPage = (path: string) => {
+    window.location.href = path;
+    setIsMenuOpen(false);
+  };
+
   const navItems = [
-    { label: 'Services', href: 'services' },
-    { label: 'About', href: 'about' },
-    { label: 'Contact', href: 'contact' },
+    { label: 'Services', href: 'services', type: 'scroll' },
+    { label: 'About', href: 'about', type: 'scroll' },
+    { label: 'Blog', href: '/blog', type: 'navigate' },
+    { label: 'Contact', href: 'contact', type: 'scroll' },
   ];
 
   return (
@@ -41,7 +47,7 @@ const Header = () => {
             {navItems.map((item) => (
               <button
                 key={item.label}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => item.type === 'scroll' ? scrollToSection(item.href) : navigateToPage(item.href)}
                 className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200"
               >
                 {item.label}
@@ -83,7 +89,7 @@ const Header = () => {
               {navItems.map((item) => (
                 <button
                   key={item.label}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => item.type === 'scroll' ? scrollToSection(item.href) : navigateToPage(item.href)}
                   className="text-gray-600 hover:text-gray-900 font-medium transition-colors duration-200 px-2 py-1 text-left"
                 >
                   {item.label}

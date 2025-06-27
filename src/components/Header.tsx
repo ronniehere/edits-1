@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -20,6 +20,11 @@ const Header = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setIsMenuOpen(false);
+  };
+
+  const handleScheduleCall = () => {
+    window.open('https://calendly.com/abe-sshift/15-minute-meeting-for-edits', '_blank');
     setIsMenuOpen(false);
   };
 
@@ -44,7 +49,7 @@ const Header = () => {
           </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item) => (
               <button
                 key={item.label}
@@ -60,6 +65,13 @@ const Header = () => {
             >
               Blog
             </Link>
+            <button
+              onClick={handleScheduleCall}
+              className="bg-white border-2 border-red-500 text-red-600 px-6 py-2 rounded-full hover:bg-red-50 transition-all duration-200 flex items-center gap-2"
+            >
+              <Calendar size={16} />
+              Schedule a call
+            </button>
             <button
               onClick={() => scrollToSection('contact')}
               className="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200"
@@ -97,6 +109,13 @@ const Header = () => {
               >
                 Blog
               </Link>
+              <button
+                onClick={handleScheduleCall}
+                className="bg-white border-2 border-red-500 text-red-600 px-6 py-2 rounded-full mx-4 text-center hover:bg-red-50 transition-all duration-200 flex items-center justify-center gap-2"
+              >
+                <Calendar size={16} />
+                Schedule a call
+              </button>
               <button
                 onClick={() => {
                   scrollToSection('contact');

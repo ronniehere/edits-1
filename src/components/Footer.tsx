@@ -118,6 +118,12 @@ const Footer = () => {
           </div>
           
           <div className="flex space-x-6 text-sm">
+            <Link 
+              to="/admin-login"
+              className="text-gray-500 hover:text-gray-400 transition-colors duration-200 text-xs"
+            >
+              Admin
+            </Link>
             <button 
               onClick={() => console.log('Privacy Policy')}
               className="text-gray-400 hover:text-white transition-colors duration-200"
@@ -136,12 +142,6 @@ const Footer = () => {
             >
               Cookie Policy
             </button>
-            <Link 
-              to="/admin-login"
-              className="text-gray-500 hover:text-gray-400 transition-colors duration-200 text-xs"
-            >
-              Admin
-            </Link>
           </div>
         </div>
       </div>

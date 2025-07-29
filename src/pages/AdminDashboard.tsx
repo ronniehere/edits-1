@@ -9,19 +9,21 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { toast } from '@/components/ui/use-toast';
 import { LogOut, Plus, Trash2 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface BlogPost {
-  id: string;
-  title: string;
-  content: string;
-  date: string;
-  excerpt: string;
+  id: number;
+  Title: string;
+  Content: string;
+  created_at: string;
+  Excerpt: string;
 }
 
 const AdminDashboard = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [newPost, setNewPost] = useState({ title: '', content: '', excerpt: '' });
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,12 +34,33 @@ const AdminDashboard = () => {
       return;
     }
 
-    // Load existing posts
-    const savedPosts = localStorage.getItem('blogPosts');
-    if (savedPosts) {
-      setPosts(JSON.parse(savedPosts));
-    }
+    // Load posts from Supabase
+    loadPosts();
   }, [navigate]);
+
+  const loadPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('Blogs')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error loading posts:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to load blog posts.',
+          variant: 'destructive',
+        });
+      } else {
+        setPosts(data || []);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('adminAuthenticated');
@@ -48,7 +71,7 @@ const AdminDashboard = () => {
     navigate('/');
   };
 
-  const handleCreatePost = () => {
+  const handleCreatePost = async () => {
     if (!newPost.title || !newPost.content || !newPost.excerpt) {
       toast({
         title: 'Error',
@@ -58,36 +81,70 @@ const AdminDashboard = () => {
       return;
     }
 
-    const post: BlogPost = {
-      id: Date.now().toString(),
-      title: newPost.title,
-      content: newPost.content,
-      excerpt: newPost.excerpt,
-      date: new Date().toISOString().split('T')[0],
-    };
+    try {
+      const { error } = await supabase
+        .from('Blogs')
+        .insert({
+          Title: newPost.title,
+          Content: newPost.content,
+          Excerpt: newPost.excerpt,
+        });
 
-    const updatedPosts = [post, ...posts];
-    setPosts(updatedPosts);
-    localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
-
-    setNewPost({ title: '', content: '', excerpt: '' });
-    setIsDialogOpen(false);
-
-    toast({
-      title: 'Success',
-      description: 'Blog post created successfully!',
-    });
+      if (error) {
+        console.error('Error creating post:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to create blog post.',
+          variant: 'destructive',
+        });
+      } else {
+        setNewPost({ title: '', content: '', excerpt: '' });
+        setIsDialogOpen(false);
+        loadPosts(); // Reload posts
+        toast({
+          title: 'Success',
+          description: 'Blog post created successfully!',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to create blog post.',
+        variant: 'destructive',
+      });
+    }
   };
 
-  const handleDeletePost = (id: string) => {
-    const updatedPosts = posts.filter(post => post.id !== id);
-    setPosts(updatedPosts);
-    localStorage.setItem('blogPosts', JSON.stringify(updatedPosts));
+  const handleDeletePost = async (id: number) => {
+    try {
+      const { error } = await supabase
+        .from('Blogs')
+        .delete()
+        .eq('id', id);
 
-    toast({
-      title: 'Success',
-      description: 'Blog post deleted successfully!',
-    });
+      if (error) {
+        console.error('Error deleting post:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to delete blog post.',
+          variant: 'destructive',
+        });
+      } else {
+        loadPosts(); // Reload posts
+        toast({
+          title: 'Success',
+          description: 'Blog post deleted successfully!',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to delete blog post.',
+        variant: 'destructive',
+      });
+    }
   };
 
   return (
@@ -157,7 +214,13 @@ const AdminDashboard = () => {
         </div>
 
         <div className="grid gap-6">
-          {posts.length === 0 ? (
+          {isLoading ? (
+            <Card>
+              <CardContent className="p-8 text-center text-gray-500">
+                Loading blog posts...
+              </CardContent>
+            </Card>
+          ) : posts.length === 0 ? (
             <Card>
               <CardContent className="p-8 text-center text-gray-500">
                 No blog posts yet. Create your first post!
@@ -169,8 +232,8 @@ const AdminDashboard = () => {
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div>
-                      <CardTitle className="text-xl mb-2">{post.title}</CardTitle>
-                      <p className="text-sm text-gray-500">{post.date}</p>
+                      <CardTitle className="text-xl mb-2">{post.Title}</CardTitle>
+                      <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
                     </div>
                     <Button
                       variant="destructive"
@@ -182,9 +245,9 @@ const AdminDashboard = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 mb-3">{post.excerpt}</p>
+                  <p className="text-gray-600 mb-3">{post.Excerpt}</p>
                   <div className="prose max-w-none">
-                    <p>{post.content.substring(0, 200)}...</p>
+                    <p>{post.Content.substring(0, 200)}...</p>
                   </div>
                 </CardContent>
               </Card>

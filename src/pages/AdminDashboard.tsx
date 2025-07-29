@@ -31,7 +31,7 @@ const AdminDashboard = () => {
     const checkAuth = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        navigate('/admin-login');
+        navigate('/auth');
         return;
       }
       // Load posts from Supabase

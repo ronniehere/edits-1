@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { toast } from '@/components/ui/use-toast';
-import { LogOut, Plus, Trash2 } from 'lucide-react';
+import { LogOut, Plus, Trash2, Edit } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 
 interface BlogPost {
@@ -22,7 +22,9 @@ interface BlogPost {
 const AdminDashboard = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [newPost, setNewPost] = useState({ title: '', content: '', excerpt: '' });
+  const [editPost, setEditPost] = useState({ id: 0, title: '', content: '', excerpt: '' });
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -150,6 +152,62 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleEditPost = (post: BlogPost) => {
+    setEditPost({
+      id: post.id,
+      title: post.Title,
+      content: post.Content,
+      excerpt: post.Excerpt,
+    });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleUpdatePost = async () => {
+    if (!editPost.title || !editPost.content || !editPost.excerpt) {
+      toast({
+        title: 'Error',
+        description: 'Please fill in all fields.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('Blogs')
+        .update({
+          Title: editPost.title,
+          Content: editPost.content,
+          Excerpt: editPost.excerpt,
+        })
+        .eq('id', editPost.id);
+
+      if (error) {
+        console.error('Error updating post:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to update blog post.',
+          variant: 'destructive',
+        });
+      } else {
+        setEditPost({ id: 0, title: '', content: '', excerpt: '' });
+        setIsEditDialogOpen(false);
+        loadPosts(); // Reload posts
+        toast({
+          title: 'Success',
+          description: 'Blog post updated successfully!',
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update blog post.',
+        variant: 'destructive',
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm border-b">
@@ -216,6 +274,49 @@ const AdminDashboard = () => {
           </Dialog>
         </div>
 
+        {/* Edit Post Dialog */}
+        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Edit Blog Post</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div>
+                <Label htmlFor="edit-title">Title</Label>
+                <Input
+                  id="edit-title"
+                  value={editPost.title}
+                  onChange={(e) => setEditPost({ ...editPost, title: e.target.value })}
+                  placeholder="Enter post title"
+                />
+              </div>
+              <div>
+                <Label htmlFor="edit-excerpt">Excerpt</Label>
+                <Textarea
+                  id="edit-excerpt"
+                  value={editPost.excerpt}
+                  onChange={(e) => setEditPost({ ...editPost, excerpt: e.target.value })}
+                  placeholder="Enter a brief excerpt"
+                  rows={3}
+                />
+              </div>
+              <div>
+                <Label htmlFor="edit-content">Content</Label>
+                <Textarea
+                  id="edit-content"
+                  value={editPost.content}
+                  onChange={(e) => setEditPost({ ...editPost, content: e.target.value })}
+                  placeholder="Enter post content"
+                  rows={8}
+                />
+              </div>
+              <Button onClick={handleUpdatePost} className="w-full">
+                Update Post
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+
         <div className="grid gap-6">
           {isLoading ? (
             <Card>
@@ -238,13 +339,22 @@ const AdminDashboard = () => {
                       <CardTitle className="text-xl mb-2">{post.Title}</CardTitle>
                       <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
                     </div>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => handleDeletePost(post.id)}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleEditPost(post)}
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => handleDeletePost(post.id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>

@@ -27,15 +27,18 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is authenticated
-    const isAuthenticated = localStorage.getItem('adminAuthenticated');
-    if (!isAuthenticated) {
-      navigate('/admin-login');
-      return;
-    }
+    // Check if user is authenticated with Supabase
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        navigate('/admin-login');
+        return;
+      }
+      // Load posts from Supabase
+      loadPosts();
+    };
 
-    // Load posts from Supabase
-    loadPosts();
+    checkAuth();
   }, [navigate]);
 
   const loadPosts = async () => {
@@ -62,8 +65,8 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminAuthenticated');
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     toast({
       title: 'Logged Out',
       description: 'You have been logged out successfully.',

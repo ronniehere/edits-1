@@ -3,23 +3,41 @@ import { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { supabase } from '@/integrations/supabase/client';
 
 interface BlogPost {
-  id: string;
-  title: string;
-  content: string;
-  date: string;
-  excerpt: string;
+  id: number;
+  Title: string;
+  Content: string;
+  created_at: string;
+  Excerpt: string;
 }
 
 const Blog = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const savedPosts = localStorage.getItem('blogPosts');
-    if (savedPosts) {
-      setPosts(JSON.parse(savedPosts));
-    }
+    const loadPosts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('Blogs')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.error('Error loading posts:', error);
+        } else {
+          setPosts(data || []);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadPosts();
   }, []);
 
   return (
@@ -43,7 +61,16 @@ const Blog = () => {
 
         <section className="py-16">
           <div className="max-w-4xl mx-auto px-6">
-            {posts.length === 0 ? (
+            {isLoading ? (
+              <Card>
+                <CardContent className="p-12 text-center">
+                  <h3 className="text-2xl font-semibold mb-4">Loading...</h3>
+                  <p className="text-gray-600">
+                    Fetching the latest blog posts for you.
+                  </p>
+                </CardContent>
+              </Card>
+            ) : posts.length === 0 ? (
               <Card>
                 <CardContent className="p-12 text-center">
                   <h3 className="text-2xl font-semibold mb-4">No Posts Yet</h3>
@@ -58,20 +85,20 @@ const Blog = () => {
                   <Card key={post.id} className="hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <div className="flex justify-between items-start mb-4">
-                        <CardTitle className="text-2xl">{post.title}</CardTitle>
+                        <CardTitle className="text-2xl">{post.Title}</CardTitle>
                         <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                          {new Date(post.date).toLocaleDateString('en-US', {
+                          {new Date(post.created_at).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long',
                             day: 'numeric'
                           })}
                         </span>
                       </div>
-                      <p className="text-lg text-gray-600">{post.excerpt}</p>
+                      <p className="text-lg text-gray-600">{post.Excerpt}</p>
                     </CardHeader>
                     <CardContent>
                       <div className="prose max-w-none">
-                        <div className="whitespace-pre-wrap">{post.content}</div>
+                        <div className="whitespace-pre-wrap">{post.Content}</div>
                       </div>
                     </CardContent>
                   </Card>

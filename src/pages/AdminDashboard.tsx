@@ -358,9 +358,9 @@ const AdminDashboard = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600 mb-3">{post.Excerpt}</p>
+                  <p className="text-gray-600 mb-3">{post.Excerpt || 'No excerpt available'}</p>
                   <div className="prose max-w-none">
-                    <p>{post.Content.substring(0, 200)}...</p>
+                    <p>{post.Content ? post.Content.substring(0, 200) + '...' : 'No content available'}</p>
                   </div>
                 </CardContent>
               </Card>
